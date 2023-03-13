@@ -1,4 +1,4 @@
-package org.mifos.mobile
+package org.mifos.mobile.presenter
 
 import android.content.Context
 
@@ -8,6 +8,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mifos.mobile.FakeRemoteDataSource
+import org.mifos.mobile.R
 
 import org.mifos.mobile.api.DataManager
 import org.mifos.mobile.models.accounts.loan.LoanWithAssociations
@@ -56,7 +58,9 @@ class LoanAccountDetailPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showLoanAccountsDetail(loanWithAssociations)
-        Mockito.verify(view, Mockito.never())?.showErrorFetchingLoanAccountsDetail(context?.getString(R.string.error_loan_account_details_loading))
+        Mockito.verify(view, Mockito.never())?.showErrorFetchingLoanAccountsDetail(context?.getString(
+            R.string.error_loan_account_details_loading
+        ))
     }
 
     @Test

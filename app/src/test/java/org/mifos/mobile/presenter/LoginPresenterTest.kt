@@ -1,4 +1,4 @@
-package org.mifos.mobile
+package org.mifos.mobile.presenter
 
 import android.content.Context
 
@@ -9,6 +9,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mifos.mobile.FakeRemoteDataSource
+import org.mifos.mobile.R
+import org.mifos.mobile.RetrofitUtils
 
 import org.mifos.mobile.api.BaseURL
 import org.mifos.mobile.api.DataManager
