@@ -1,4 +1,4 @@
-package org.mifos.mobile
+package org.mifos.mobile.presenter
 
 import android.content.Context
 
@@ -9,6 +9,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mifos.mobile.FakeRemoteDataSource
+import org.mifos.mobile.R
 
 import org.mifos.mobile.api.DataManager
 import org.mifos.mobile.models.Page
@@ -64,7 +66,9 @@ class RecentTransactionsPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showRecentTransactions(recentTransaction?.pageItems)
-        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(R.string.error_recent_transactions_loading))
+        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(
+            R.string.error_recent_transactions_loading
+        ))
     }
 
     @Test
@@ -76,7 +80,9 @@ class RecentTransactionsPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showLoadMoreRecentTransactions(recentTransaction?.pageItems)
-        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(R.string.error_recent_transactions_loading))
+        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(
+            R.string.error_recent_transactions_loading
+        ))
     }
 
     @Test
@@ -88,7 +94,9 @@ class RecentTransactionsPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showEmptyTransaction()
-        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(R.string.error_recent_transactions_loading))
+        Mockito.verify(view, Mockito.never())?.showErrorFetchingRecentTransactions(context?.getString(
+            R.string.error_recent_transactions_loading
+        ))
     }
 
     @Test
