@@ -1,4 +1,4 @@
-package org.mifos.mobile.presenter
+package org.mifos.mobile
 
 import android.content.Context
 import io.reactivex.Observable
@@ -10,8 +10,6 @@ import org.junit.Rule
 import org.junit.Test
 
 import org.junit.runner.RunWith
-import org.mifos.mobile.FakeRemoteDataSource
-import org.mifos.mobile.R
 import org.mifos.mobile.api.DataManager
 import org.mifos.mobile.models.beneficiary.BeneficiaryPayload
 import org.mifos.mobile.models.beneficiary.BeneficiaryUpdatePayload

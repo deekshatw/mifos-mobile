@@ -1,4 +1,4 @@
-package org.mifos.mobile.presenter
+package org.mifos.mobile
 
 import android.content.Context
 
@@ -8,8 +8,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mifos.mobile.FakeRemoteDataSource
-import org.mifos.mobile.R
 
 import org.mifos.mobile.api.DataManager
 import org.mifos.mobile.models.accounts.savings.SavingsWithAssociations
@@ -57,9 +55,7 @@ class SavingAccountDetailPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showSavingAccountsDetail(savingsWithAssociations)
-        Mockito.verify(view, Mockito.never())?.showErrorFetchingSavingAccountsDetail(context?.getString(
-            R.string.error_saving_account_details_loading
-        ))
+        Mockito.verify(view, Mockito.never())?.showErrorFetchingSavingAccountsDetail(context?.getString(R.string.error_saving_account_details_loading))
     }
 
     @Test

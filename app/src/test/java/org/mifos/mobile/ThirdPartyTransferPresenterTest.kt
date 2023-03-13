@@ -1,4 +1,4 @@
-package org.mifos.mobile.presenter
+package org.mifos.mobile
 
 import android.content.Context
 
@@ -9,8 +9,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mifos.mobile.FakeRemoteDataSource
-import org.mifos.mobile.R
 
 import org.mifos.mobile.api.DataManager
 import org.mifos.mobile.models.beneficiary.Beneficiary
@@ -67,8 +65,7 @@ class ThirdPartyTransferPresenterTest {
         Mockito.verify(view)?.showThirdPartyTransferTemplate(accountOptionsTemplate)
         Mockito.verify(view)?.showBeneficiaryList(beneficiaryList)
         Mockito.verify(view, Mockito.never())?.showError(context?.getString(
-            R.string.error_fetching_account_transfer_template
-        ))
+                R.string.error_fetching_account_transfer_template))
     }
 
     @Test
@@ -79,8 +76,7 @@ class ThirdPartyTransferPresenterTest {
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showError(context?.getString(
-            R.string.error_fetching_account_transfer_template
-        ))
+                R.string.error_fetching_account_transfer_template))
         Mockito.verify(view, Mockito.never())?.showThirdPartyTransferTemplate(accountOptionsTemplate)
         Mockito.verify(view, Mockito.never())?.showBeneficiaryList(beneficiaryList)
     }
