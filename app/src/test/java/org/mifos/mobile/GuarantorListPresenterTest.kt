@@ -1,20 +1,20 @@
-package org.mifos.mobile.presenter
+package org.mifos.mobile
 
 import android.content.Context
 
 import io.reactivex.Observable
-
-import okhttp3.ResponseBody
 
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mifos.mobile.FakeRemoteDataSource
 
 import org.mifos.mobile.api.DataManager
-import org.mifos.mobile.presenters.GuarantorDetailPresenter
-import org.mifos.mobile.ui.views.GuarantorDetailView
+import org.mifos.mobile.models.guarantor.GuarantorPayload
+import org.mifos.mobile.presenters.GuarantorListPresenter
+import org.mifos.mobile.ui.views.GuarantorListView
 import org.mifos.mobile.util.RxSchedulersOverrideRule
 
 import org.mockito.Mock
@@ -24,7 +24,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import java.io.IOException
 
 @RunWith(MockitoJUnitRunner::class)
-class GuarantorDetailPresenterTest {
+class GuarantorListPresenterTest {
     @Rule
     @JvmField
     val mOverrideSchedulersRule = RxSchedulersOverrideRule()
@@ -36,17 +36,16 @@ class GuarantorDetailPresenterTest {
     var dataManager: DataManager? = null
 
     @Mock
-    var view: GuarantorDetailView? = null
-
-    @Mock
-    var responseBody: ResponseBody? = null
-    private var presenter: GuarantorDetailPresenter? = null
+    var view: GuarantorListView? = null
+    private var presenter: GuarantorListPresenter? = null
+    private var guarantorPayloadList: List<GuarantorPayload?>? = null
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        presenter = GuarantorDetailPresenter(context!!, dataManager!!)
+        presenter = GuarantorListPresenter(context!!, dataManager!!)
         presenter?.attachView(view)
+        guarantorPayloadList = FakeRemoteDataSource.guarantorsList
     }
 
     @After
@@ -57,26 +56,24 @@ class GuarantorDetailPresenterTest {
 
     @Test
     @Throws(IOException::class)
-    fun testDeleteGuarantor() {
+    fun testGetGuarantorList() {
         val loanId: Long = 1
-        val guarantorId: Long = 1
-        Mockito.`when`(dataManager?.deleteGuarantor(loanId, guarantorId))
-                .thenReturn(Observable.just(responseBody))
-        presenter?.deleteGuarantor(loanId, guarantorId)
+        Mockito.`when`(dataManager?.getGuarantorList(loanId))
+                .thenReturn(Observable.just(guarantorPayloadList))
+        presenter?.getGuarantorList(loanId)
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
-        Mockito.verify(view)?.guarantorDeletedSuccessfully(responseBody?.string())
+        Mockito.verify(view)?.showGuarantorListSuccessfully(guarantorPayloadList)
     }
 
     @Test
     @Throws(IOException::class)
-    fun testDeleteGuarantorOnError() {
+    fun testGetGuarantorListOnError() {
         val loanId: Long = 1
-        val guarantorId: Long = 1
         val exception = Exception("ExceptionMessage")
-        Mockito.`when`(dataManager?.deleteGuarantor(loanId, guarantorId))
+        Mockito.`when`(dataManager?.getGuarantorList(loanId))
                 .thenReturn(Observable.error(exception))
-        presenter?.deleteGuarantor(loanId, guarantorId)
+        presenter?.getGuarantorList(loanId)
         Mockito.verify(view)?.showProgress()
         Mockito.verify(view)?.hideProgress()
         Mockito.verify(view)?.showError(exception.message)

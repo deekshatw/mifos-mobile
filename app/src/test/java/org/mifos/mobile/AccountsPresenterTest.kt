@@ -1,4 +1,4 @@
-package org.mifos.mobile.presenter
+package org.mifos.mobile
 
 import android.content.Context
 import io.reactivex.Observable
