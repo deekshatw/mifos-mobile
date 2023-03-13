@@ -25,6 +25,7 @@ import org.mifos.mobile.utils.PasswordStrength
 import org.mifos.mobile.utils.Toaster
 
 import javax.inject.Inject
+import kotlin.math.sign
 
 /**
  * Created by dilpreet on 31/7/17.
@@ -106,9 +107,20 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
 
             override fun afterTextChanged(editable: Editable) {}
         })
+        checkPhone()
         return rootView
     }
 
+    private fun checkPhone(){
+        val signUpPhone = etPhoneNumber?.text.toString().trim()
+        if (signUpPhone.isEmpty()){
+            etPhoneNumber?.error = "It is required!"
+            etPhoneNumber?.requestFocus()
+        }
+        if (signUpPhone.length<10){
+            etPhoneNumber?.error = "Please enter a valid phone!"
+        }
+    }
     private fun updatePasswordStrengthView(password: String) {
         if (TextView.VISIBLE != strengthView?.visibility) return
         if (password.isEmpty()) {
