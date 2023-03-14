@@ -30,6 +30,15 @@
         layout="@layout/error_layout"
         android:id="@+id/layout_error"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Have more questions? Contact Us"
+        android:textSize="@dimen/text_medium" />
+
     <LinearLayout
         android:id="@+id/toggleButton"
         android:layout_width="match_parent"
